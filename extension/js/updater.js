@@ -1,4 +1,4 @@
-/* Copyright 2026 Ачкасова Олеся. SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright 2026 LesiaPNG (Ачкасова Олеся). SPDX-License-Identifier: GPL-3.0-only */
 'use strict';
 var fs=require('fs'),path=require('path'),crypto=require('crypto'),http=require('http'),https=require('https');
 var URL=require('url').URL;

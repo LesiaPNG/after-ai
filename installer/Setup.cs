@@ -1,4 +1,4 @@
-// Copyright 2026 Ачкасова Олеся. SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2026 LesiaPNG (Ачкасова Олеся). SPDX-License-Identifier: GPL-3.0-only
 using System;
 using System.IO;
 using System.IO.Compression;
@@ -9,8 +9,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Microsoft.Win32;
 [assembly: AssemblyTitle("After Ai Setup")]
-[assembly: AssemblyCompany("Ачкасова Олеся")]
-[assembly: AssemblyCopyright("Copyright 2026 Ачкасова Олеся")]
+[assembly: AssemblyCompany("LesiaPNG (Ачкасова Олеся)")]
+[assembly: AssemblyCopyright("Copyright 2026 LesiaPNG (Ачкасова Олеся)")]
 [assembly: AssemblyVersion("0.0.1.0")]
 [assembly: AssemblyFileVersion("0.0.1.0")]
 
@@ -31,11 +31,11 @@ class Setup : Form {
  Setup(bool removing){
   uninstall=removing;Text="After Ai · "+Version+" · экспериментальная версия";ClientSize=new Size(580,460);FormBorderStyle=FormBorderStyle.FixedDialog;MaximizeBox=false;StartPosition=FormStartPosition.CenterScreen;BackColor=Color.FromArgb(247,245,255);Font=new Font("Segoe UI",10);
   Controls.Add(new Label{Text="✦ After Ai",Font=new Font("Segoe UI",28,FontStyle.Bold),Location=new Point(28,24),AutoSize=true,ForeColor=Color.FromArgb(69,48,120)});
-  Controls.Add(new Label{Text="Плагин нейрогенерации для After Effects 2024 / 2026\nВерсия 0.0.1 · эксперимент для своих, ещё не альфа\nАвтор: Ачкасова Олеся",Location=new Point(30,90),Size=new Size(525,85)});
+  Controls.Add(new Label{Text="Плагин нейрогенерации для After Effects 2024 / 2026\nВерсия 0.0.1 · эксперимент для своих, ещё не альфа\nАвтор: LesiaPNG (Ачкасова Олеся)",Location=new Point(30,90),Size=new Size(525,85)});
   Controls.Add(new Label{Text=removing?"Будут удалены только файлы After Ai. Проекты, результаты\nи сохранённый API-ключ останутся на компьютере.":"Установка для текущего пользователя Windows.\nПеред установкой закройте After Effects.\nПосле установки: Window → Extensions → After Ai.",Location=new Point(30,185),Size=new Size(520,75)});
   consent.Text="Разрешить загрузку неподписанных панелей Adobe";consent.Location=new Point(30,270);consent.Size=new Size(520,30);consent.Checked=DebugEnabled();consent.Visible=!removing;
   Controls.Add(consent);Controls.Add(new Label{Text="Эта настройка разрешает After Ai и другим неподписанным\nпанелям открываться в AE. Права администратора не нужны.",Location=new Point(50,305),Size=new Size(490,50),Visible=!removing,ForeColor=Color.DimGray});
-  var license=new LinkLabel{Text="Свободное ПО · GNU GPLv3 · показать лицензию",Location=new Point(30,362),AutoSize=true};license.LinkClicked+=(s,e)=>{using(var zip=Payload()){var entry=zip.GetEntry("LICENSE");using(var reader=new StreamReader(entry.Open())){var f=new Form{Text="After Ai · GNU GPLv3",Size=new Size(760,600),StartPosition=FormStartPosition.CenterParent};f.Controls.Add(new TextBox{Multiline=true,ReadOnly=true,ScrollBars=ScrollBars.Vertical,Dock=DockStyle.Fill,Text="Copyright 2026 Ачкасова Олеся\r\n\r\n"+reader.ReadToEnd()});f.ShowDialog(this);}}};Controls.Add(license);
+  var license=new LinkLabel{Text="Свободное ПО · GNU GPLv3 · показать лицензию",Location=new Point(30,362),AutoSize=true};license.LinkClicked+=(s,e)=>{using(var zip=Payload()){var entry=zip.GetEntry("LICENSE");using(var reader=new StreamReader(entry.Open())){var f=new Form{Text="After Ai · GNU GPLv3",Size=new Size(760,600),StartPosition=FormStartPosition.CenterParent};f.Controls.Add(new TextBox{Multiline=true,ReadOnly=true,ScrollBars=ScrollBars.Vertical,Dock=DockStyle.Fill,Text="Copyright 2026 LesiaPNG (Ачкасова Олеся)\r\n\r\n"+reader.ReadToEnd()});f.ShowDialog(this);}}};Controls.Add(license);
   install.Text=removing?"Удалить After Ai":"Установить After Ai";install.Location=new Point(335,397);install.Size=new Size(215,40);install.BackColor=Color.FromArgb(112,83,204);install.ForeColor=Color.White;install.FlatStyle=FlatStyle.Flat;install.Click+=(s,e)=>Run();Controls.Add(install);
   status.Location=new Point(30,395);status.Size=new Size(285,48);status.Font=new Font("Segoe UI",9);Controls.Add(status);
  }
@@ -61,7 +61,7 @@ class Setup : Form {
   Registry.SetValue(@"HKEY_CURRENT_USER\Software\Adobe\CSXS.11","PlayerDebugMode","1",RegistryValueKind.String);
   Registry.SetValue(@"HKEY_CURRENT_USER\Software\Adobe\CSXS.12","PlayerDebugMode","1",RegistryValueKind.String);
   Directory.CreateDirectory(ProgramRoot);string uninstaller=Path.Combine(ProgramRoot,"Uninstall.exe");File.Copy(Application.ExecutablePath,uninstaller,true);
-  using(var key=Registry.CurrentUser.CreateSubKey(RegistryPath)){key.SetValue("DisplayName","After Ai (экспериментальная версия)");key.SetValue("DisplayVersion",Version);key.SetValue("Publisher","Ачкасова Олеся");key.SetValue("UninstallString","\""+uninstaller+"\" --uninstall");key.SetValue("InstallLocation",root);key.SetValue("NoModify",1);key.SetValue("NoRepair",1);}
+  using(var key=Registry.CurrentUser.CreateSubKey(RegistryPath)){key.SetValue("DisplayName","After Ai (экспериментальная версия)");key.SetValue("DisplayVersion",Version);key.SetValue("Publisher","LesiaPNG (Ачкасова Олеся)");key.SetValue("UninstallString","\""+uninstaller+"\" --uninstall");key.SetValue("InstallLocation",root);key.SetValue("NoModify",1);key.SetValue("NoRepair",1);}
  }
  void Remove(){using(var zip=Payload()){foreach(var entry in zip.Entries){if(entry.FullName.EndsWith("/"))continue;string target=Destination(ExtensionRoot,entry.FullName);if(File.Exists(target))File.Delete(target);}}Registry.CurrentUser.DeleteSubKeyTree(RegistryPath,false);}
  [STAThread]static void Main(string[] args){

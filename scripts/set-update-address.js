@@ -1,4 +1,4 @@
-/* Copyright 2026 Ачкасова Олеся. SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright 2026 LesiaPNG (Ачкасова Олеся). SPDX-License-Identifier: GPL-3.0-only */
 'use strict';
 const fs=require('fs'),path=require('path');
 const url=new URL(process.argv[2]);if(!/^https?:$/.test(url.protocol)||url.username||url.password||url.search||url.hash)throw Error('Pass a public site URL without credentials or query parameters');

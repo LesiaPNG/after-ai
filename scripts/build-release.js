@@ -1,4 +1,4 @@
-/* Copyright 2026 Ачкасова Олеся. SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright 2026 LesiaPNG (Ачкасова Олеся). SPDX-License-Identifier: GPL-3.0-only */
 'use strict';
 const fs=require('fs'),path=require('path'),crypto=require('crypto'),cp=require('child_process');
 process.on('uncaughtException',function(){console.error('Release build failed. Check the documented build prerequisites and signing-key contract.');process.exit(1);});

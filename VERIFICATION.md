@@ -2,7 +2,7 @@
 
 ## Public experimental release 0.0.1 — 2026-10-29
 
-- Standalone Windows installer with copyright attribution to Ачкасова Олеся, GPLv3 license, explicit unsigned-panel permission and removal through Windows Apps.
+- Standalone Windows installer with copyright attribution to LesiaPNG (Ачкасова Олеся), GPLv3 license, explicit unsigned-panel permission and removal through Windows Apps.
 - Installer payload validated without changing the local AE installation: version 0.0.1, 16 expected public files. No credential store, user projects, browser profiles or generation history are packaged.
 - 18 automated checks passed, including independent CEP adapter compatibility, signed-manifest validation, tampering rejection, version comparison and installer checksum verification. Browser UI test passed with a synthetic provider.
 - Download site deployed as an independent persistent user service on the author's server, port 47683. HTTP page, author notice, signed manifest and downloaded installer checksum verified from another machine. Private network addresses are not published.

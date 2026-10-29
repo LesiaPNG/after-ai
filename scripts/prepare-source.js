@@ -1,4 +1,4 @@
-/* Copyright 2026 Ачкасова Олеся. SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright 2026 LesiaPNG (Ачкасова Олеся). SPDX-License-Identifier: GPL-3.0-only */
 'use strict';
 const fs=require('fs'),path=require('path'),root=path.resolve(__dirname,'..'),version=require('../package.json').version;
 const destination=path.join(root,'dist','source',version);

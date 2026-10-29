@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2026 Ачкасова Олеся. SPDX-License-Identifier: GPL-3.0-only
+# Copyright 2026 LesiaPNG (Ачкасова Олеся). SPDX-License-Identifier: GPL-3.0-only
 """Dependency-free download site; serves an explicit public-file allowlist only."""
 import http.server
 import os
