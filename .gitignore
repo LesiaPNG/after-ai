@@ -1,0 +1,16 @@
+node_modules/
+dist/
+test-output/
+*.aiflow/
+*.aep
+*.aepx
+*.dpapi
+.env
+.env.*
+*.log
+HAP-*
+*.key
+*.pem
+!extension/update-public-key.pem
+extension/vendor/
+node_modules/

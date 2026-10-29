@@ -1,0 +1,7 @@
+/* Copyright 2026 Ачкасова Олеся. SPDX-License-Identifier: GPL-3.0-only */
+'use strict';
+const fs=require('fs'),path=require('path'),root=path.resolve(__dirname,'..'),version=require('../package.json').version;
+const destination=path.join(root,'dist','source',version);
+const files=['.gitignore','package.json','README.md','README.ru.md','LICENSE','COPYRIGHT','CONTRIBUTING.md','CONTRACT.md','VERIFICATION.md','extension/index.html','extension/panel.css','extension/CSXS/manifest.xml','extension/THIRD_PARTY.md','extension/js/cep.js','extension/js/panel.js','extension/js/rules.js','extension/js/backend.js','extension/js/updater.js','extension/jsx/host.jsx','extension/jsx/json2.jsx','extension/worker/openrouter.ps1','extension/release.json','extension/update-public-key.pem','installer/Setup.cs','scripts/build-release.js','scripts/prepare-source.js','scripts/set-update-address.js','server/server.js','server/server.py','server/README.md','site/index.html','site/site.css','updates/location.json','updates/experimental.json','tests/rules.test.js','tests/backend.test.js','tests/worker.test.js','tests/updater.test.js','tests/cep.test.js','tests/ui.test.js'];
+for(const relative of files){if(relative.includes('..')||relative.startsWith('/')||/\.env/i.test(relative)||/private/i.test(relative))throw Error('Invalid source manifest');const target=path.join(destination,relative);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(root,relative),target);}
+console.log(JSON.stringify({source:destination,files:files.length,version}));

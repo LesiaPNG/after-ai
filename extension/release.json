@@ -1,0 +1,7 @@
+{
+  "product": "studio.aiflow.ae",
+  "version": "0.0.1",
+  "channel": "experimental",
+  "manifestUrl": "https://raw.githubusercontent.com/LesiaPNG/ai-flow/main/updates/experimental.json",
+  "discoveryUrl": "https://raw.githubusercontent.com/LesiaPNG/ai-flow/main/updates/location.json"
+}

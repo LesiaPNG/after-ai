@@ -1,0 +1,11 @@
+{
+  "name": "ae-ai-flow-mvp",
+  "version": "0.0.1",
+  "author": "Ачкасова Олеся",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "description": "Windows CEP panel for OpenRouter video generation in After Effects 2024 and 2026",
+  "scripts": { "test": "node --test tests/rules.test.js tests/backend.test.js tests/worker.test.js tests/updater.test.js tests/cep.test.js", "test:ui": "node --test tests/ui.test.js", "build:release": "node scripts/build-release.js", "serve": "node server/server.js" },
+  "devDependencies": { "playwright": "^1.56.0" },
+  "engines": { "node": ">=16" }
+}

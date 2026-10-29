@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' file: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>AI Flow</title><link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header><div class="brand"><span class="brand-icon">✦</span><div>AI Flow<span class="eyebrow">0.0.1 · EXPERIMENTAL</span></div></div><button id="settingsToggle" class="icon" title="Настройки API" aria-label="Настройки API">⚙</button></header>
+  <main>
+    <section id="updateBanner" class="notice" hidden><strong id="updateTitle"></strong><p id="updateMessage" class="hint"></p><button id="installUpdate" class="small">Установить обновление</button></section>
+    <section id="settingsPanel" class="card" hidden>
+      <div class="section-title">Подключение <span class="badge">OpenRouter</span></div>
+      <label for="apiKey">API-ключ</label><input id="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Вставьте ключ здесь">
+      <div class="row"><button id="saveKey">Сохранить ключ</button><button id="deleteKey" class="quiet">Удалить</button></div>
+      <p class="hint" id="keyStatus">Проверяем подключение…</p>
+      <p class="hint">Ключ шифруется средствами Windows. В проект и историю он не записывается.</p>
+      <hr><p class="hint">AI Flow 0.0.1 · экспериментальная версия для тестирования.<br>© 2026 Ачкасова Олеся · GNU GPLv3</p>
+      <button id="checkUpdates" class="quiet small">Проверить обновления AI Flow</button><p id="updateStatus" class="hint">Обновления AI Flow устанавливаются отдельно от других приложений.</p>
+    </section>
+    <div class="section-title">Материал <span class="step">01</span></div>
+    <section id="dropzone" class="dropzone" tabindex="0" aria-label="Прикрепить изображение">
+      <div id="emptyAttachment"><span class="upload-icon">↥</span><strong>Перетащите изображение</strong><span class="hint">PNG, JPG, WEBP · до 12 МБ</span></div>
+      <div id="attachmentView" hidden><img id="preview" alt="Прикреплённый материал"><div class="attachment-label"><strong id="attachmentName"></strong><span id="attachmentKind" class="hint"></span></div></div>
+      <div class="row attachment-actions"><button id="chooseFile" class="small">Прикрепить файл</button><button id="clearAttachment" class="quiet small" hidden>Убрать</button></div>
+      <input id="fileInput" type="file" accept=".png,.jpg,.jpeg,.webp" hidden>
+    </section>
+    <div class="row source-buttons"><button id="fromLayer">↗ Взять слой из AE</button><button id="fromComposition" class="quiet">Кадр композиции</button></div>
+    <p class="hint source-hint">У видеослоя берём кадр исходника под курсором. Кадр всей композиции вставляется новым слоем.</p>
+    <div id="destination" class="destination">Откройте композицию в сохранённом проекте</div>
+
+    <div class="section-title spaced">Что анимируем <span class="step">02</span></div>
+    <label for="prompt" class="sr-only">Промт</label>
+    <textarea id="prompt" rows="4" maxlength="50000" placeholder="Опишите движение, камеру, свет и детали…"></textarea>
+    <div class="prompt-footer"><span>Промт передаётся выбранной модели</span><span id="promptCount">0</span></div>
+
+    <div class="section-title spaced">Модель и параметры <span class="step">03</span></div>
+    <div class="model-row"><label class="sr-only" for="model">Модель</label><select id="model"><option value="">Загрузите модели</option></select><button id="loadModels" class="icon" title="Обновить каталог" aria-label="Обновить каталог">↻</button></div>
+    <div class="grid">
+      <div><label for="duration">Длительность</label><select id="duration"><option value="">Авто</option></select></div>
+      <div><label for="resolution">Разрешение</label><select id="resolution"><option value="">Авто</option></select></div>
+      <div><label for="aspectRatio">Пропорции</label><select id="aspectRatio"><option value="">Авто</option></select></div>
+      <div><label for="size">Размер модели</label><select id="size"><option value="">По параметрам</option></select></div>
+    </div>
+    <details class="advanced"><summary>Дополнительно</summary><div class="grid"><div><label for="seed">Seed</label><input id="seed" type="number" min="0" step="1" placeholder="Случайный"></div><div><label for="manualRate">Своя оценка, $/сек</label><input id="manualRate" type="number" min="0" step="0.001" placeholder="Если тариф неизвестен"></div></div><label class="checkbox"><input id="audio" type="checkbox" disabled> Генерировать звук</label><p class="hint">Параметры доступны в пределах возможностей модели.</p></details>
+    <div id="sizeWarning" class="notice" hidden></div>
+    <div class="price-line"><div><span class="hint">Примерно за запуск</span><strong id="estimate">—</strong></div><span id="priceNote" class="hint">Загрузите тарифы модели</span></div>
+    <button id="generate" class="primary">✦ Сгенерировать</button>
+    <div id="status" class="status" role="status" aria-live="polite">Готово к работе</div>
+
+    <div class="section-title spaced">История проекта <button id="refreshHistory" class="quiet small">Обновить</button></div>
+    <div id="history" class="history"><div class="empty-history">Здесь появятся ваши генерации</div></div>
+    <p class="hint">Совпадает размер исходника → замена слоя. Другой размер → новый слой, Scale 100%. Оригинальные файлы сохраняются.</p>
+  </main>
+  <footer><div><span class="hint">Потрачено в проекте</span><strong id="total">$0.00</strong><span id="unsettled" class="hint"></span></div><div class="corner-price"><span class="hint">Этот запуск</span><strong id="estimateCorner">—</strong></div></footer>
+  <script src="js/cep.js"></script><script src="js/rules.js"></script><script src="js/panel.js"></script>
+</body></html>
