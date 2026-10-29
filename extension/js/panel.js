@@ -17,8 +17,8 @@
       if(checking)return;checking=true;
       try{
         var result=await client.check();
-        if(!result.available){if(manual)$('updateStatus').textContent='Установлена последняя версия AI Flow.';return;}
-        $('updateBanner').hidden=false;$('updateTitle').textContent='AI Flow '+result.manifest.version;
+        if(!result.available){if(manual)$('updateStatus').textContent='Установлена последняя версия After Ai.';return;}
+        $('updateBanner').hidden=false;$('updateTitle').textContent='After Ai '+result.manifest.version;
         $('updateMessage').textContent='Загружаем проверенное обновление…';$('installUpdate').disabled=true;
         download=await client.download(result);$('installUpdate').disabled=false;
         $('updateMessage').textContent='Обновление скачано. Установщик попросит закрыть After Effects. Проекты и API-ключ сохраняются.';
@@ -26,12 +26,12 @@
       finally{checking=false;}
     }
     $('checkUpdates').addEventListener('click',function(){check(true);});
-    $('installUpdate').addEventListener('click',function(){if(running){$('updateMessage').textContent='Дождитесь завершения генерации перед обновлением.';return;}try{client.install(download);}catch(_){$('updateMessage').textContent='Не удалось запустить установщик. Скачайте его с сайта AI Flow.';}});
+    $('installUpdate').addEventListener('click',function(){if(running){$('updateMessage').textContent='Дождитесь завершения генерации перед обновлением.';return;}try{client.install(download);}catch(_){$('updateMessage').textContent='Не удалось запустить установщик. Скачайте его с сайта After Ai.';}});
     check(false);
   }
   function host(method, data) {
     return new Promise(function (resolve, reject) {
-      if (!cs) return reject(new Error('Откройте AI Flow через меню расширений After Effects.'));
+      if (!cs) return reject(new Error('Откройте After Ai через меню расширений After Effects.'));
       var deadline = setTimeout(function () { reject(new Error('AE пока не ответил панели. Остановите предпросмотр и попробуйте снова.')); }, 15000);
       var encoded = encodeURIComponent(JSON.stringify(data || {}));
       var expression = '(function(){try{$.evalFile(new File(' + JSON.stringify(bridgePath) + '));return AIFlow.dispatch(' + JSON.stringify(method) + ',' + JSON.stringify(encoded) + ');}catch(e){return \'{"ok":false,"code":"AE_ERROR"}\';}})()';
@@ -275,7 +275,7 @@
     $('generate').addEventListener('click',generate);$('refreshHistory').addEventListener('click',refreshHistory);
   }
   async function init() {
-    if(!cs||!nodeRequire){status('Панель запускается внутри After Effects: Окно → Расширения → AI Flow.','error');return;}
+    if(!cs||!nodeRequire){status('Панель запускается внутри After Effects: Окно → Расширения → After Ai.','error');return;}
     try{
       fs=nodeRequire('fs');path=nodeRequire('path');fileURL=nodeRequire('url').pathToFileURL;
       var extensionRoot=cs.getExtensionPath();

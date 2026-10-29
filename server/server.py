@@ -10,7 +10,7 @@ import urllib.parse
 ROOT = pathlib.Path(os.environ.get('AIFLOW_PUBLIC_ROOT', pathlib.Path(__file__).resolve().parent.parent / 'dist/site')).resolve()
 PORT = int(os.environ.get('AIFLOW_PORT', '47683'))
 HOST = os.environ.get('AIFLOW_HOST', '0.0.0.0')
-ALLOWED = re.compile(r'^(index\.html|site\.css|LICENSE|COPYRIGHT|updates/experimental\.json|downloads/(AI-Flow-\d+\.\d+\.\d+-Setup\.exe|SHA256SUMS))$')
+ALLOWED = re.compile(r'^(index\.html|site\.css|LICENSE|COPYRIGHT|updates/experimental\.json|downloads/(After-Ai-\d+\.\d+\.\d+-Setup\.exe|SHA256SUMS))$')
 
 class Handler(http.server.BaseHTTPRequestHandler):
     def log_message(self, *_args):
@@ -25,7 +25,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
     def respond(self, head):
         name = urllib.parse.unquote(urllib.parse.urlsplit(self.path).path).lstrip('/') or 'index.html'
         if name == 'health':
-            body = b'{"product":"AI Flow","status":"ok"}'
+            body = b'{"product":"After Ai","status":"ok"}'
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
             self.send_header('Content-Length', str(len(body)))
@@ -57,5 +57,5 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     self.wfile.write(chunk)
 
 if __name__ == '__main__':
-    print('AI Flow download site listening on port ' + str(PORT), flush=True)
+    print('After Ai download site listening on port ' + str(PORT), flush=True)
     http.server.ThreadingHTTPServer((HOST, PORT), Handler).serve_forever()

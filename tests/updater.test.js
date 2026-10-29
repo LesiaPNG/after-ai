@@ -3,7 +3,7 @@ const test=require('node:test'),assert=require('node:assert/strict'),crypto=requ
 const updater=require('../extension/js/updater');
 function sign(m,key){const b=Buffer.from(JSON.stringify(m));return Buffer.from(JSON.stringify({payload:b.toString('base64'),signature:crypto.sign(null,b,key).toString('base64')}));}
 const bytes=Buffer.from('synthetic-installer-not-executable');
-function manifest(){return {schemaVersion:1,product:'studio.aiflow.ae',channel:'experimental',version:'0.0.2',installer:{file:'AI-Flow-0.0.2-Setup.exe',sha256:crypto.createHash('sha256').update(bytes).digest('hex'),size:bytes.length}};}
+function manifest(){return {schemaVersion:1,product:'studio.aiflow.ae',channel:'experimental',version:'0.0.2',installer:{file:'After-Ai-0.0.2-Setup.exe',sha256:crypto.createHash('sha256').update(bytes).digest('hex'),size:bytes.length}};}
 test('signed update rejects modified manifests, foreign products and downgrades',()=>{
  const k=crypto.generateKeyPairSync('ed25519'),other=crypto.generateKeyPairSync('ed25519');
  const good=sign(manifest(),k.privateKey);assert.equal(updater.verifyEnvelope(good,k.publicKey).version,'0.0.2');

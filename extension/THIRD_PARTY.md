@@ -2,7 +2,7 @@
 
 ## CEP host interface
 
-The distributed build uses AI Flow's own small adapter to After Effects' built-in CEP functions. Adobe's CSInterface.js and SDK are not included in this distribution. Adobe After Effects is a separately licensed host application.
+The distributed build uses After Ai's own small adapter to After Effects' built-in CEP functions. Adobe's CSInterface.js and SDK are not included in this distribution. Adobe After Effects is a separately licensed host application.
 
 ## JSON-js / json2.js
 

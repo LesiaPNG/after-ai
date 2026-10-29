@@ -4,8 +4,8 @@ const fs=require('fs'),path=require('path'),crypto=require('crypto'),cp=require(
 process.on('uncaughtException',function(){console.error('Release build failed. Check the documented build prerequisites and signing-key contract.');process.exit(1);});
 const root=path.resolve(__dirname,'..'),pkg=require('../package.json');
 function arg(name,fallback){const i=process.argv.indexOf(name);return i<0?fallback:process.argv[i+1];}
-const manifestUrl=arg('--manifest-url','https://raw.githubusercontent.com/LesiaPNG/ai-flow/main/updates/experimental.json');
-const discoveryUrl=arg('--discovery-url','https://raw.githubusercontent.com/LesiaPNG/ai-flow/main/updates/location.json');
+const manifestUrl=arg('--manifest-url','https://raw.githubusercontent.com/LesiaPNG/after-ai/main/updates/experimental.json');
+const discoveryUrl=arg('--discovery-url','https://raw.githubusercontent.com/LesiaPNG/after-ai/main/updates/location.json');
 for(const value of [manifestUrl,discoveryUrl].filter(Boolean)){const u=new URL(value);if(!/^https?:$/.test(u.protocol)||u.username||u.password)throw Error('Invalid public update URL');}
 const keyFile=arg('--signing-key',process.env.AIFLOW_SIGNING_KEY_FILE||path.join(process.env.LOCALAPPDATA,'AIFlowRelease','signing-private.pem'));
 fs.mkdirSync(path.dirname(keyFile),{recursive:true});
@@ -25,7 +25,7 @@ const zip=path.join(stage,'payload.zip');
 function literal(value){return "'"+value.replace(/'/g,"''")+"'";}
 function run(command,args){const result=cp.spawnSync(command,args,{encoding:'utf8',windowsHide:true});if(result.status!==0){process.stderr.write('Release build failed at '+path.basename(command)+'\n'+(result.stdout||'').slice(0,4000));process.exit(1);}}
 run('powershell.exe',['-NoLogo','-NoProfile','-NonInteractive','-Command','Add-Type -AssemblyName System.IO.Compression.FileSystem; [IO.Compression.ZipFile]::CreateFromDirectory('+literal(payload)+','+literal(zip)+')']);
-const name='AI-Flow-'+pkg.version+'-Setup.exe',installer=path.join(release,name),compiler=path.join(process.env.WINDIR,'Microsoft.NET','Framework64','v4.0.30319','csc.exe');
+const name='After-Ai-'+pkg.version+'-Setup.exe',installer=path.join(release,name),compiler=path.join(process.env.WINDIR,'Microsoft.NET','Framework64','v4.0.30319','csc.exe');
 const setupSource=path.join(stage,'Setup.cs');fs.writeFileSync(setupSource,fs.readFileSync(path.join(root,'installer','Setup.cs'),'utf8').replace(/0\.0\.1/g,pkg.version));
 run(compiler,['/nologo','/target:winexe','/platform:anycpu','/codepage:65001','/optimize+','/out:'+installer,'/resource:'+zip+',AIFlowPayload','/reference:System.Windows.Forms.dll','/reference:System.Drawing.dll','/reference:System.IO.Compression.dll','/reference:System.IO.Compression.FileSystem.dll',setupSource]);
 const bytes=fs.readFileSync(installer),sha256=crypto.createHash('sha256').update(bytes).digest('hex');

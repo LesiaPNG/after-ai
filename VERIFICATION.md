@@ -14,7 +14,7 @@
 
 - Reproduced menu selection opening no panel in AE 26.3.
 - Renewed the panel registration (`studio.aiflow.ae.workspace`) within the same bundle and reduced its initial/minimum height for smaller displays.
-- Reinstalled the manifest and fully restarted AE. The panel opened through Window > Extensions > AI Flow and loaded the public model catalogue. It remained visible while Resizer created another project.
+- Reinstalled the manifest and fully restarted AE. The panel opened through Window > Extensions > After Ai and loaded the public model catalogue. It remained visible while Resizer created another project.
 - No credential values were read or changed. Paid generation was not part of this check.
 
 ## Confirmed
@@ -23,7 +23,7 @@
 - Browser UI suite: passing. Native CEP file-picker interface is mocked; tests attach an image, take a layer, calculate the price, show the mismatch warning and complete a synthetic submit/poll/download/import cycle. Checks horizontal layout at widths 300, 380 and 600 pixels.
 - Live public OpenRouter catalog: HTTP 200, 30 models returned through the real PowerShell worker without a key. 26 models expose generation durations. Current estimator handles the published per-second tariffs for 21 of those; token-priced models show an unknown estimate and allow a manual rate.
 - Real After Effects 2026, version 26.3: separate synthetic project. Host checks passed for stable target IDs, source retrieval, matching-size replacement, preserved position/scale/keyframes/effect, duplicate-import prevention, mismatch insertion at Scale 100%, retained original layer and Project-bin folder placement.
-- Real CEP panel in AE 2026: opens from Window > Extensions > AI Flow, docks in the workspace, loads the live catalog and options, obtains the selected source with a preview, captures the current composition frame and displays a live price estimate (the observed default example was approximately $0.30).
+- Real CEP panel in AE 2026: opens from Window > Extensions > After Ai, docks in the workspace, loads the live catalog and options, obtains the selected source with a preview, captures the current composition frame and displays a live price estimate (the observed default example was approximately $0.30).
 - Composition PNG output verified at 640 × 360 pixels, matching its synthetic composition.
 - Installed bundle for the current Windows user, with CEP 11/12 developer loading enabled after explicit user authorization. AE scripting file/network preference enabled from the authorized test setup.
 

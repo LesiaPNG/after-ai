@@ -34,7 +34,7 @@ var AIFlow = (function () {
         }
         if (!input.outputPath) fail('NO_PATH');
         var temp = null, queued = false;
-        app.beginUndoGroup('AI Flow: кадр исходника');
+        app.beginUndoGroup('After Ai: кадр исходника');
         try {
             var fps = src.frameRate || comp.frameRate || 25;
             var duration = Math.max(src.duration || 1, 1/fps);
@@ -82,7 +82,7 @@ var AIFlow = (function () {
         for (var l=1; l<=comp.numLayers; l++) {
             if (comp.layer(l).comment.indexOf(marker) !== -1) return { mode: 'already', width: comp.layer(l).width, height: comp.layer(l).height };
         }
-        app.beginUndoGroup('AI Flow: результат генерации');
+        app.beginUndoGroup('After Ai: результат генерации');
         var imported = null;
         try {
             imported = app.project.importFile(new ImportOptions(new File(input.path)));

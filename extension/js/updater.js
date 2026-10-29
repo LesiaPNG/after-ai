@@ -18,7 +18,7 @@ function verifyEnvelope(bytes,publicKey){
  try{var e=JSON.parse(bytes.toString('utf8'));if(typeof e.payload!=='string'||typeof e.signature!=='string')throw 0;
   var payload=Buffer.from(e.payload,'base64');if(payload.length>65536||!crypto.verify(null,payload,publicKey,Buffer.from(e.signature,'base64')))throw 0;
   var m=JSON.parse(payload.toString('utf8'));version(m.version);
-  if(m.schemaVersion!==1||m.product!=='studio.aiflow.ae'||m.channel!=='experimental'||!m.installer||!/^AI-Flow-\d+\.\d+\.\d+-Setup\.exe$/.test(m.installer.file)||!/^[a-f0-9]{64}$/.test(m.installer.sha256)||!Number.isSafeInteger(m.installer.size)||m.installer.size<1||m.installer.size>15*1024*1024)throw 0;
+  if(m.schemaVersion!==1||m.product!=='studio.aiflow.ae'||m.channel!=='experimental'||!m.installer||!/^After-Ai-\d+\.\d+\.\d+-Setup\.exe$/.test(m.installer.file)||!/^[a-f0-9]{64}$/.test(m.installer.sha256)||!Number.isSafeInteger(m.installer.size)||m.installer.size<1||m.installer.size>15*1024*1024)throw 0;
   return m;
  }catch(_){throw fail('UPDATE_SIGNATURE');}
 }
@@ -43,7 +43,7 @@ Client.prototype.download=async function(update){
  return {file:destination,sha256:m.installer.sha256,version:m.version};
 };
 Client.prototype.install=function(download){
- if(!download||!/^AI-Flow-\d+\.\d+\.\d+-Setup\.exe$/.test(path.basename(download.file)))throw fail('UPDATE_VERSION');
+ if(!download||!/^After-Ai-\d+\.\d+\.\d+-Setup\.exe$/.test(path.basename(download.file)))throw fail('UPDATE_VERSION');
  if(crypto.createHash('sha256').update(fs.readFileSync(download.file)).digest('hex')!==download.sha256)throw fail('UPDATE_CHECKSUM');
  var child=require('child_process').spawn(download.file,[],{detached:true,stdio:'ignore',windowsHide:false});child.on('error',function(){});child.unref();
 };
